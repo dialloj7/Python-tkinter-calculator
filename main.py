@@ -14,6 +14,16 @@ class Calculator:
         self.entry.delete(0,END)
         self.operator =""
 
+    # my plus/minus function
+    def toggle_sign(self):
+        current = self.entry.get()
+        if current.startswith('-'):
+            new_value = current[1:]
+        else:
+            new_value = '-' + current
+        self.operator = new_value
+        self.var.set(new_value)
+
     ''' def delete(self):
         self.operator = str(self.entry.delete(len(self.entry.get())-1))
     '''
@@ -142,6 +152,13 @@ class Calculator:
         button_rbrace = Button(label_rbrace, text=')', font=('Helvetica', '16'), height=1, width=3,
                                command=lambda: self.click_button(')'),bg='black',fg='cyan')
         button_rbrace.pack()
+
+        # I added a plus/minus button
+        label_pm = Label(label_fkey, bg='black')
+        label_pm.grid(row=4, column=1, sticky=E, pady=10)
+        button_pm = Button(label_pm, text='±', font=('Helvetica', '16'), height=1, width=3, command=self.toggle_sign, bg='black', fg='cyan')
+        button_pm.pack()
+
 
 c = Calculator(root)
 root.title("Sushant\'s Calculator")
