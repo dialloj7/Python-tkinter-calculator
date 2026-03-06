@@ -4,11 +4,19 @@ root = Tk()
 #button_9 = Button(label_key,text='9',height=3,width=5,font=('Helvetica','12'))
 #button_9.grid(row=0,column=0)
 class Calculator:
-    def click_button(self,numbers):
-        global operator
-        global var
+    # I modified the function to prevent multiple decimal points from being entered
+    def click_button(self, numbers):
+        if numbers == '.':
+            import re
+            parts = re.split(r'[\+\-\*/]', self.operator)
+            last_number = parts[-1] if parts else ""
+
+            if '.' in last_number:
+                return
+
         self.operator = self.operator + str(numbers)
         self.var.set(self.operator)
+
 
     def clear(self):
         self.entry.delete(0,END)
