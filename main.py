@@ -32,6 +32,21 @@ class Calculator:
         self.operator = new_value
         self.var.set(new_value)
 
+    # my square root function
+    def sqrt(self):
+        try:
+            value = float(self.entry.get())
+            if value < 0:
+                self.var.set("Error")
+                self.operator = ""
+            else:
+                result = value ** 0.5
+                self.var.set(result)
+                self.operator = str(result)
+        except:
+            self.var.set("Error")
+            self.operator = ""
+
     ''' def delete(self):
         self.operator = str(self.entry.delete(len(self.entry.get())-1))
     '''
@@ -167,6 +182,13 @@ class Calculator:
         button_pm = Button(label_pm, text='±', font=('Helvetica', '16'), height=1, width=3, command=self.toggle_sign, bg='black', fg='cyan')
         button_pm.pack()
 
+        # I added a square root button
+        label_sqrt = Label(label_fkey, bg='black')
+        label_sqrt.grid(row=4, column=0, sticky=W, pady=10)
+        button_sqrt = Button(label_sqrt, text='√', font=('Helvetica', '16'),
+                             height=1, width=3, command=self.sqrt,
+                             bg='black', fg='cyan')
+        button_sqrt.pack()
 
 c = Calculator(root)
 root.title("Sushant\'s Calculator")
