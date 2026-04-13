@@ -6,6 +6,12 @@ root = Tk()
 class Calculator:
     # I modified the function to prevent multiple decimal points from being entered
     def click_button(self, numbers):
+
+    # Block invalid operator sequences
+        if numbers in ['+', '-', '*', '/']:
+            if self.operator.endswith(('+', '-', '*', '/')):
+                return
+
         if numbers == '.':
             import re
             parts = re.split(r'[\+\-\*/]', self.operator)
