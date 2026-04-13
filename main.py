@@ -51,12 +51,17 @@ class Calculator:
         self.operator = str(self.entry.delete(len(self.entry.get())-1))
     '''
 
-
+    #replaced eval with a safe version
     def evaluate(self):
-        self.answer =eval(self.entry.get())
-        self.var.set(self.answer)
-        self.operator = str(self.answer)
-
+        try:
+            expression = self.entry.get()
+            result = eval(expression, {"__builtins__": None}, {})
+            self.var.set(result)
+            self.operator = str(result)
+        except:
+            self.var.set("Error")
+            self.operator = ""
+            
     def __init__(self,master):
 
         self.operator = ""
