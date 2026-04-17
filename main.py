@@ -3,14 +3,27 @@ from tkinter import *
 root = Tk()
 #button_9 = Button(label_key,text='9',height=3,width=5,font=('Helvetica','12'))
 #button_9.grid(row=0,column=0)
+
 class Calculator:
+    
     # I modified the function to prevent multiple decimal points from being entered
     def click_button(self, numbers):
-
+        numbers = str(numbers)
     # Block invalid operator sequences
         if numbers in ['+', '-', '*', '/']:
             if self.operator.endswith(('+', '-', '*', '/')):
                 return
+
+        # Prevent multiple leading zeros
+        if numbers == '0':
+            import re
+            parts = re.split(r'[\+\-\*/]', self.operator)
+            last_number = parts[-1] if parts else ""
+
+        # If the number segment starts with "0" and has no decimal, block more zeros
+            if last_number.startswith("0") and "." not in last_number:
+                return
+
 
         if numbers == '.':
             import re
